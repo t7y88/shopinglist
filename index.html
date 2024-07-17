@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <script>
+        const ul = document.querySelector("ul");                // selecting the unsorted list that was made in the HTML file
+        const input = document.querySelector("input");          // ... input ...
+        const button= document.querySelector("button");         // ... button ...
+
+        // making a new event listener 
+        // works => when the button(Add item) is clicked
+        // does => add item to a sorted list and shows it on the page 
+
+        button.addEventListener("click", () => {
+            const value = input.value;
+            input.value = '';
+        
+            //creating new elements in the DOM
+
+            const listItem = document.createElement("li");
+            const listSpan = document.createElement("span");
+            const listButton = document.createElement('button');
+
+            // now the DOM would look like in the HTML (as in if it was made in HTML)
+            // <li class = "listItem"></li>
+            //    <span class = "listSpan"><span>
+            //    <button class = "listButton"><button>
+            
+            listItem.appendChild(listSpan);
+            listItem.appendChild(listButton);
+
+            // set the value of the span as the value of the input in the text feild from the intial HTML
+            // set the text content of the button as delete 
+
+            listSpan.textContent = value;
+            listButton.textContent = "DELETE";
+
+            // append the whole Itemlist into the unorder list we created in the HTML
+
+            ul.appendChild(listItem);
+
+            // make a eventListener that delets the whole list on click on the new list button
+
+            listButton.addEventListener("click", () => {
+                ul.removeChild(listItem);
+            })
+ 
+        })
+
+    </script>
+  </body>
+</html>
